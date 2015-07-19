@@ -15,7 +15,6 @@ def kondate_create():
     name = request.forms.get('name')
     kcal = request.forms.get('kcal')
     image = request.forms.get('image')
-    import pdb; pdb.set_trace()
     db.menus.insert().execute(name=name, kcal=kcal, image=image)
     return redirect('/')
 
