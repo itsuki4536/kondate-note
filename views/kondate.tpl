@@ -7,6 +7,8 @@
 <body>
     <p>献立一覧</p>
 
+    <a href="/menus/new">献立の新規作成</a>
+
     <ul>
         % for menu in menus:
         <li>{{menu['id']}} {{menu['name']}} {{menu['kcal']}}</li>
