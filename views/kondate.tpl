@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head lang="ja">
-    <meta charset="UTF-8">
-    <title>献立ノート</title>
-</head>
-<body>
-    <p>献立一覧</p>
-
-    <a href="/menus/new">献立の新規作成</a>
-
-    <ul>
-        % for menu in menus:
-        <li>{{menu['id']}} {{menu['name']}} {{menu['kcal']}}</li>
-        % end
-    </ul>
-</body>
-</html>
+% rebase('base.tpl')
+<ul class="list-group">
+    % for menu in menus:
+    <li class="list-group-item">{{menu['id']}} {{menu['name']}} {{menu['kcal']}}</li>
+    % end
+</ul>
