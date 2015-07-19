@@ -5,6 +5,12 @@
     <title>献立ノート</title>
 </head>
 <body>
-    <p>hello</p>
+    <p>献立一覧</p>
+
+    <ul>
+        % for menu in menus:
+        <li>{{menu['id']}} {{menu['name']}} {{menu['kcal']}}</li>
+        % end
+    </ul>
 </body>
 </html>
