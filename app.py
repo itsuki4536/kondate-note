@@ -11,13 +11,33 @@ def kondate():
 def kondate_new():
     return template('kondate_new')
 
+@route('/menus/<id:int>')
+def edit_kondate_form(id):
+    menu = db.menus.select().where(db.menus.c.id == id).execute().fetchone()
+    return template('kondate_edit', menu=menu)
+
+@post('/menus/<id:int>')
+def edit_kondate(id):
+    name = request.forms.name
+    kcal = request.forms.kcal
+    image = request.forms.image
+    try:
+        kcal = int(kcal)
+        db.menus.update().where(db.menus.c.id == id).execute(
+            name=name, kcal=kcal, image=image
+        )
+    except ValueError:
+        return '入力が不正です.'
+    except IntegrityError:
+        return 'データが重複しています'
+    return redirect('/')
+
 @post('/menus/new')
 def kondate_create():
     name = request.forms.name
     kcal = request.forms.kcal
     image = request.forms.image
     try:
-        import pdb; pdb.set_trace()
         kcal = int(kcal)
         db.menus.insert().execute(name=name, kcal=kcal, image=image)
     except ValueError:
