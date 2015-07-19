@@ -26,9 +26,4 @@ def kondate_create():
     return redirect('/')
 
 
-@route('/menus/<id>')
-def kondate(id):
-    return  db.menus.delete().where(db.menus.c.id == id).execute()
-    return redirect('/')
-
 run(host='localhost', port=8080, debug=True, reloader=True)
