@@ -1,4 +1,5 @@
 from bottle import route, post, run, template, request, redirect
+from sqlalchemy.exc import IntegrityError
 import db
 
 @route('/')
@@ -15,7 +16,14 @@ def kondate_create():
     name = request.forms.name
     kcal = request.forms.kcal
     image = request.forms.image
-    db.menus.insert().execute(name=name, kcal=kcal, image=image)
+    try:
+        import pdb; pdb.set_trace()
+        kcal = int(kcal)
+        db.menus.insert().execute(name=name, kcal=kcal, image=image)
+    except ValueError:
+        return '入力が不正です.'
+    except IntegrityError:
+        return 'データが重複しています'
     return redirect('/')
 
 
