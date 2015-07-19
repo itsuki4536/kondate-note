@@ -17,7 +17,6 @@ def kondate_create():
     kcal = request.forms.kcal
     image = request.forms.image
     try:
-        import pdb; pdb.set_trace()
         kcal = int(kcal)
         db.menus.insert().execute(name=name, kcal=kcal, image=image)
     except ValueError:
@@ -26,5 +25,10 @@ def kondate_create():
         return 'データが重複しています'
     return redirect('/')
 
+
+@route('/menus/<id>')
+def kondate(id):
+    return  db.menus.delete().where(db.menus.c.id == id).execute()
+    return redirect('/')
 
 run(host='localhost', port=8080, debug=True, reloader=True)
